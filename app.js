@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const routes = require('./router');
-
+const routes = require('./routes/router');
+const request = require('supertest');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -19,8 +19,10 @@ db.once('open', () => {
 
 app.use(express.json());
 
-app.use('/', routes);
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
+
+module.exports = app;
